@@ -1,0 +1,32 @@
+{
+  "name": "saucedemo-cypress-cucumber-qa",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Professional QA automation framework for SauceDemo using Cypress, Cucumber BDD, Page Objects and Allure.",
+  "scripts": {
+    "test": "cypress run --browser chrome",
+    "test:headed": "cypress run --browser chrome --headed",
+    "test:open": "cypress open",
+    "test:smoke": "cypress run --browser chrome --env tags=@smoke",
+    "test:regression": "cypress run --browser chrome --env tags=@regression",
+    "test:negative": "cypress run --browser chrome --env tags=@negative",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "node -e \"require('fs').rmSync('allure-results',{recursive:true,force:true});require('fs').rmSync('allure-report',{recursive:true,force:true});require('fs').rmSync('cypress/screenshots',{recursive:true,force:true});require('fs').rmSync('cypress/videos',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^26.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.7",
+    "@shelex/cypress-allure-plugin": "^2.41.0",
+    "allure-commandline": "^2.34.1",
+    "cypress": "^15.3.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-cypress": "^5.0.0",
+    "prettier": "^3.6.0"
+  }
+}
