@@ -1,5 +1,5 @@
 const { Given, When, Then } = require("@badeball/cypress-cucumber-preprocessor");
-const { expect } = require("chai");
+//const { expect } = require("chai");
 
 const LoginPage = require("../../pages/LoginPage");
 const ProductsPage = require("../../pages/ProductsPage");
