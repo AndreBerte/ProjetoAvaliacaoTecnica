@@ -62,8 +62,7 @@ Then("o produto {string} deve ser adicionado ao carrinho", (productName) => {
 });
 
 Then("o indicador do carrinho deve apresentar {string} item", (count) => {
-  cy.visit("/inventory.html");
-  ProductsPage.assertCartCount(count);
+  cy.get(ProductsPage.selectors.cartBadge).should("have.text", String(count));
 });
 
 Given("adicionei o produto {string} ao carrinho", (productName) => {
@@ -164,7 +163,7 @@ Then("o indicador do carrinho deve corresponder à quantidade de produtos adicio
 });
 
 When("tento adicionar novamente um produto que já está no carrinho", () => {
-  cy.visit("/inventory.html");
+  cy.go("back");
   cy.fixture("products").then((products) => {
     ProductsPage.addProduct(products.backpack);
   });
@@ -183,11 +182,7 @@ Then("a quantidade total de itens não deve ultrapassar a quantidade de produtos
   cy.get(CartPage.selectors.item)
     .its("length")
     .then((cartCount) => {
-      cy.visit("/inventory.html");
-      cy.get('[data-test="inventory-item"]')
-        .its("length")
-        .then((availableCount) => {
-          cy.wrap(cartCount).should("be.at.most", availableCount);
-        });
+      cy.get('[data-test="shopping-cart-badge"]').should("have.text", String(cartCount));
+      expect(cartCount).to.be.at.most(6);
     });
 });
