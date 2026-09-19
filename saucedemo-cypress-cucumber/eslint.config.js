@@ -22,4 +22,10 @@ module.exports = [
       ...cypress.configs.recommended.rules,
     },
   },
+  {
+    files: ["cypress/support/e2e.js"],
+    languageOptions: {
+      sourceType: "module",
+    },
+  },
 ];
