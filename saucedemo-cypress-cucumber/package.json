@@ -15,8 +15,8 @@
     "allure:serve": "allure serve allure-results",
     "lint": "eslint . --config eslint.config.js --ext .js",
     "lint:fix": "eslint . --config eslint.config.js --ext .js --fix",
-    "format": "prettier --write . --config .prettierc.js",
-    "format:check": "prettier --check . --config .prettierc.js",
+    "format": "prettier --write . --config .prettierrc.json",
+    "format:check": "prettier --check . --config .prettierrc.json",
     "clean": "node -e \"require('fs').rmSync('allure-results',{recursive:true,force:true});require('fs').rmSync('allure-report',{recursive:true,force:true});require('fs').rmSync('cypress/screenshots',{recursive:true,force:true});require('fs').rmSync('cypress/videos',{recursive:true,force:true})\""
   },
   "devDependencies": {
