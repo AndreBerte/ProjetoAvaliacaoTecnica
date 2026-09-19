@@ -41,16 +41,16 @@ jobs:
           #cache-dependency-path: saucedemo-cypress-cucumber/package-lock.json
 
       - name: Install dependencies
-        run: npm install --include=dev
+        run: npm ci --include=dev
 
       - name: Lint
         run: npm run lint
 
       - name: Format files
-        run: npx prettier --write . --config .prettierc.js  
+        run: npm run format  
 
       - name: Format check
-        run: npx prettier --check . --config .prettierc.js
+        run: npm run format:check
 
       - name: Run Cypress
         id: cypress
