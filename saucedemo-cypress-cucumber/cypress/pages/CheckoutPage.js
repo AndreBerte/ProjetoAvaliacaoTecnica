@@ -12,9 +12,14 @@ class CheckoutPage {
   };
 
   fillCustomerData(data) {
-    cy.get(this.selectors.firstName).clear().type(data.firstName);
-    cy.get(this.selectors.lastName).clear().type(data.lastName);
-    cy.get(this.selectors.postalCode).clear().type(data.postalCode);
+    cy.get(this.selectors.firstName).clear();
+    cy.get(this.selectors.firstName).type(data.firstName);
+
+    cy.get(this.selectors.lastName).clear();
+    cy.get(this.selectors.lastName).type(data.lastName);
+
+    cy.get(this.selectors.postalCode).clear();
+    cy.get(this.selectors.postalCode).type(data.postalCode);
   }
 
   continue() {
