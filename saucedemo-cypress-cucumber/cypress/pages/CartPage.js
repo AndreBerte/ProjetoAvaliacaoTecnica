@@ -10,7 +10,9 @@ class CartPage {
   }
 
   removeProduct(productName) {
-    cy.contains(this.selectors.item, productName).find('[data-test^="remove"]').click();
+    cy.contains(this.selectors.item, productName)
+      .find('[data-test^="remove"]')
+      .click();
   }
 
   assertProductNotPresent(productName) {

@@ -1,8 +1,4 @@
-const {
-  Given,
-  When,
-  Then,
-} = require("@badeball/cypress-cucumber-preprocessor");
+const { Given, When, Then } = require("@badeball/cypress-cucumber-preprocessor");
 const { expect } = require("chai");
 
 const LoginPage = require("../../pages/LoginPage");
@@ -143,9 +139,12 @@ When("tento avançar para a revisão do pedido", () => {
   CheckoutPage.continue();
 });
 
-Then("não devo avançar para a página de revisão", () => {
-  cy.url().should("include", "/checkout-step-one.html");
-});
+Then(
+  "não devo avançar para a página de revisão",
+  () => {
+    cy.url().should("include", "/checkout-step-one.html");
+  },
+);
 
 Then(
   "uma mensagem informando que o primeiro nome é obrigatório deve ser apresentada",
