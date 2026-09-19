@@ -1,21 +1,18 @@
 const cypress = require("eslint-plugin-cypress");
+const globals = require("globals");
 
 module.exports = [
   {
     files: ["**/*.js"],
     languageOptions: {
       ecmaVersion: "latest",
-      sourceType: "module",
+      sourceType: "commonjs",
       globals: {
+        ...globals.node,
+        ...globals.browser,
         Cypress: "readonly",
         cy: "readonly",
-        document: "readonly",
         expect: "readonly",
-        localStorage: "readonly",
-        module: "readonly",
-        process: "readonly",
-        require: "readonly",
-        window: "readonly",
       },
     },
     plugins: {
@@ -23,7 +20,6 @@ module.exports = [
     },
     rules: {
       ...cypress.configs.recommended.rules,
-      "no-undef": "error",
     },
   },
 ];

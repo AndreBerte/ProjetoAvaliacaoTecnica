@@ -143,12 +143,9 @@ When("tento avançar para a revisão do pedido", () => {
   CheckoutPage.continue();
 });
 
-Then(
-  "não devo avançar para a página de revisão",
-  () => {
-    cy.url().should("include", "/checkout-step-one.html");
-  },
-);
+Then("não devo avançar para a página de revisão", () => {
+  cy.url().should("include", "/checkout-step-one.html");
+});
 
 Then(
   "uma mensagem informando que o primeiro nome é obrigatório deve ser apresentada",
@@ -172,10 +169,7 @@ Then(
     cy.get(CartPage.selectors.item)
       .its("length")
       .then((count) => {
-        cy.get('[data-test="shopping-cart-badge"]').should(
-          "have.text",
-          String(count),
-        );
+        cy.get('[data-test="shopping-cart-badge"]').should("have.text", String(count));
       });
   },
 );

@@ -3,7 +3,7 @@ const cypress = require("eslint-plugin-cypress");
 
 module.exports = [
   {
-    files: ["*/.js"],
+    files: ["**/*.js"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "commonjs",

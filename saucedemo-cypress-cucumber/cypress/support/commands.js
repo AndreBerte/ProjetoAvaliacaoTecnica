@@ -5,19 +5,15 @@ Cypress.Commands.add("login", (userType = "standard") => {
     cy.visit("/");
     cy.get('[data-test="username"]').clear();
     cy.get('[data-test="username"]').type(user.username);
-
     cy.get('[data-test="password"]').clear();
     cy.get('[data-test="password"]').type(user.password, { log: false });
-
     cy.get('[data-test="login-button"]').click();
     cy.url().should("include", "/inventory.html");
   });
 });
 
 Cypress.Commands.add("addProductToCart", (productName) => {
-  cy.contains('[data-test^="add-to-cart"]', productName)
-    .should("be.visible")
-    .click();
+  cy.contains('[data-test^="add-to-cart"]', productName).should("be.visible").click();
 });
 
 Cypress.Commands.add("openCart", () => {
