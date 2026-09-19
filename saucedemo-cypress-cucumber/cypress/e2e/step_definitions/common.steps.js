@@ -19,11 +19,13 @@ Given("estou na página de produtos", () => {
 });
 
 Given("informo o usuário {string}", (username) => {
-  cy.get(LoginPage.selectors.username).clear().type(username);
+  cy.get(LoginPage.selectors.username).clear();
+  cy.get(LoginPage.selectors.username).type(username);
 });
 
 Given("informo a senha {string}", (password) => {
-  cy.get(LoginPage.selectors.password).clear().type(password, { log: false });
+  cy.get(LoginPage.selectors.password).clear();
+  cy.get(LoginPage.selectors.password).type(password, { log: false });
 });
 
 When("clico no botão de login", () => {
