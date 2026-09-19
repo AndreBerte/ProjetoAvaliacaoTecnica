@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 20
 
     env:
-      CYPRESS_BASE_URL: ${{ vars.CYPRESS_BASE_URL || 'https://www.saucedemo.com' }}
+      CYPRESS_BASE_URL: https://www.saucedemo.com
       CYPRESS_TAGS: ${{ github.event.inputs.tags || '@regression' }}
 
     steps:
