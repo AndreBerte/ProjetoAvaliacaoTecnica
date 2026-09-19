@@ -1,10 +1,15 @@
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
-const { createEsbuildPlugin } = require("@badeball/cypress-cucumber-preprocessor/esbuild");
+const {
+  addCucumberPreprocessorPlugin,
+} = require("@badeball/cypress-cucumber-preprocessor");
+const {
+  createEsbuildPlugin,
+} = require("@badeball/cypress-cucumber-preprocessor/esbuild");
 const allureWriter = require("@shelex/cypress-allure-plugin/writer");
 
 async function setupNodeEvents(on, config) {
+  config.env.stepDefinitions = "cypress/e2e/step_definitions/**/*.js";
   await addCucumberPreprocessorPlugin(on, config);
 
   const bundler = createBundler({
@@ -38,6 +43,7 @@ module.exports = defineConfig({
       allureReuseAfterSpec: true,
       allureResultsPath: "allure-results",
       tags: process.env.CYPRESS_TAGS || "",
+      stepDefinitions: "cypress/e2e/step_definitions/**/*.js",
     },
   },
 });
