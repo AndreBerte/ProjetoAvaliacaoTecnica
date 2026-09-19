@@ -7,19 +7,22 @@ module.exports = [
       ecmaVersion: "latest",
       sourceType: "commonjs",
       globals: {
-        require: "readonly",
-        module: "readonly",
-        process: "readonly",
         Cypress: "readonly",
         cy: "readonly",
         expect: "readonly",
+        module: "readonly",
+        process: "readonly",
+        require: "readonly",
+        window: "readonly",
+        document: "readonly",
+        localStorage: "readonly",
       },
     },
     plugins: {
       cypress,
     },
     rules: {
-      "cypress/unsafe-to-chain-command": "error",
+      ...cypress.configs.recommended.rules,
     },
   },
 ];
