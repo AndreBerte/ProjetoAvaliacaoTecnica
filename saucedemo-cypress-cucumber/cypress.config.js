@@ -28,11 +28,6 @@ module.exports = defineConfig({
     setupNodeEvents,
     screenshotOnRunFailure: true,
     video: true,
-    videoCompression: 32,
-    retries: {
-      runMode: 1,
-      openMode: 0,
-    },
     viewportWidth: 1440,
     viewportHeight: 900,
     defaultCommandTimeout: 10000,
