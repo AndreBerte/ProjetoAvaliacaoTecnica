@@ -139,19 +139,13 @@ When("tento avançar para a revisão do pedido", () => {
   CheckoutPage.continue();
 });
 
-Then(
-  "não devo avançar para a página de revisão",
-  () => {
-    cy.url().should("include", "/checkout-step-one.html");
-  },
-);
+Then("não devo avançar para a página de revisão", () => {
+  cy.url().should("include", "/checkout-step-one.html");
+});
 
-Then(
-  "uma mensagem informando que o primeiro nome é obrigatório deve ser apresentada",
-  () => {
-    CheckoutPage.assertErrorContains("First Name is required");
-  },
-);
+Then("uma mensagem informando que o primeiro nome é obrigatório deve ser apresentada", () => {
+  CheckoutPage.assertErrorContains("First Name is required");
+});
 
 When("adiciono todos os produtos disponíveis ao carrinho", () => {
   ProductsPage.addAllProducts();
@@ -162,16 +156,13 @@ Then("todos os produtos disponíveis devem ser apresentados no carrinho", () => 
   cy.get(CartPage.selectors.item).should("have.length.greaterThan", 0);
 });
 
-Then(
-  "o indicador do carrinho deve corresponder à quantidade de produtos adicionados",
-  () => {
-    cy.get(CartPage.selectors.item)
-      .its("length")
-      .then((count) => {
-        cy.get('[data-test="shopping-cart-badge"]').should("have.text", String(count));
-      });
-  },
-);
+Then("o indicador do carrinho deve corresponder à quantidade de produtos adicionados", () => {
+  cy.get(CartPage.selectors.item)
+    .its("length")
+    .then((count) => {
+      cy.get('[data-test="shopping-cart-badge"]').should("have.text", String(count));
+    });
+});
 
 When("tento adicionar novamente um produto que já está no carrinho", () => {
   cy.visit("/inventory.html");
@@ -189,18 +180,15 @@ Then("o produto não deve ser duplicado no carrinho", () => {
   });
 });
 
-Then(
-  "a quantidade total de itens não deve ultrapassar a quantidade de produtos disponíveis",
-  () => {
-    cy.get(CartPage.selectors.item)
-      .its("length")
-      .then((cartCount) => {
-        cy.visit("/inventory.html");
-        cy.get('[data-test="inventory-item"]')
-          .its("length")
-          .then((availableCount) => {
-            expect(cartCount).to.be.at.most(availableCount);
-          });
-      });
-  },
-);
+Then("a quantidade total de itens não deve ultrapassar a quantidade de produtos disponíveis", () => {
+  cy.get(CartPage.selectors.item)
+    .its("length")
+    .then((cartCount) => {
+      cy.visit("/inventory.html");
+      cy.get('[data-test="inventory-item"]')
+        .its("length")
+        .then((availableCount) => {
+          expect(cartCount).to.be.at.most(availableCount);
+        });
+    });
+});
