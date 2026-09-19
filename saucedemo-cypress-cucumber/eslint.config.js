@@ -5,17 +5,17 @@ module.exports = [
     files: ["**/*.js"],
     languageOptions: {
       ecmaVersion: "latest",
-      sourceType: "commonjs",
+      sourceType: "module",
       globals: {
         Cypress: "readonly",
         cy: "readonly",
+        document: "readonly",
         expect: "readonly",
+        localStorage: "readonly",
         module: "readonly",
         process: "readonly",
         require: "readonly",
         window: "readonly",
-        document: "readonly",
-        localStorage: "readonly",
       },
     },
     plugins: {
@@ -23,6 +23,7 @@ module.exports = [
     },
     rules: {
       ...cypress.configs.recommended.rules,
+      "no-undef": "error",
     },
   },
 ];
