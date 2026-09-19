@@ -46,8 +46,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Format files
+        run: npx prettier --write . --config .prettierc.js  
+
       - name: Format check
-        run: npm run format:check
+        run: npx prettier --check . --config .prettierc.js
 
       - name: Run Cypress
         id: cypress
