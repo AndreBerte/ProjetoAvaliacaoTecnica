@@ -143,9 +143,12 @@ Then("não devo avançar para a página de revisão", () => {
   cy.url().should("include", "/checkout-step-one.html");
 });
 
-Then("uma mensagem informando que o primeiro nome é obrigatório deve ser apresentada", () => {
-  CheckoutPage.assertErrorContains("First Name is required");
-});
+Then(
+  "uma mensagem informando que o primeiro nome é obrigatório deve ser apresentada",
+  () => {
+    CheckoutPage.assertErrorContains("First Name is required");
+  },
+);
 
 When("adiciono todos os produtos disponíveis ao carrinho", () => {
   ProductsPage.addAllProducts();

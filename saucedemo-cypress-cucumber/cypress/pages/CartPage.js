@@ -20,7 +20,9 @@ class CartPage {
   }
 
   assertEmpty() {
-    cy.get(this.selectors.cartList).find(this.selectors.item).should("have.length", 0);
+    cy.get(this.selectors.cartList)
+      .find(this.selectors.item)
+      .should("have.length", 0);
   }
 
   checkout() {

@@ -13,7 +13,9 @@ Cypress.Commands.add("login", (userType = "standard") => {
 });
 
 Cypress.Commands.add("addProductToCart", (productName) => {
-  cy.contains('[data-test^="add-to-cart"]', productName).should("be.visible").click();
+  cy.contains('[data-test^="add-to-cart"]', productName)
+    .should("be.visible")
+    .click();
 });
 
 Cypress.Commands.add("openCart", () => {
