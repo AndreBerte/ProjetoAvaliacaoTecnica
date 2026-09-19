@@ -20,48 +20,62 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      CYPRESS_apiBaseUrl: ${{ vars.BRASILAPI_BASE_URL || 'https://brasilapi.com.br' }}
-      CYPRESS_maxRequests: ${{ inputs.maxRequests || vars.BRASILAPI_MAX_REQUESTS || '10' }}
+      CYPRESS_apiBaseUrl: https://brasilapi.com.br
+      CYPRESS_maxRequests: ${{ inputs.maxRequests || '10' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
           node-version: 20
-          cache: npm
+
       - name: Install dependencies
-        run: npm ci
+        working-directory: brasilapi-cypress-cucumber-rest-qa
+        run: npm install
+
       - name: Lint
+        working-directory: brasilapi-cypress-cucumber-rest-qa
         run: npm run lint
+
       - name: Format check
+        working-directory: brasilapi-cypress-cucumber-rest-qa
         run: npm run format:check
+
       - name: Cypress REST tests
         uses: cypress-io/github-action@v7
+        with:
+          working-directory: brasilapi-cypress-cucumber-rest-qa
+
       - name: Generate Allure report
         if: always()
+        working-directory: brasilapi-cypress-cucumber-rest-qa
         run: npm run allure:generate
+
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: brasilapi-evidence
-          path: evidence/
+          path: brasilapi-cypress-cucumber-rest-qa/evidence/
           if-no-files-found: ignore
           retention-days: 14
+
       - name: Upload Allure results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: brasilapi-allure-results
-          path: allure-results/
+          path: brasilapi-cypress-cucumber-rest-qa/allure-results/
           if-no-files-found: ignore
           retention-days: 14
+
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: brasilapi-allure-report
-          path: allure-report/
+          path: brasilapi-cypress-cucumber-rest-qa/allure-report/
           if-no-files-found: ignore
           retention-days: 14
