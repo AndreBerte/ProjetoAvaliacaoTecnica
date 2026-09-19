@@ -1,9 +1,4 @@
-const {
-  Before,
-  After,
-  BeforeAll,
-  AfterAll,
-} = require("@badeball/cypress-cucumber-preprocessor");
+const { Before, After, BeforeAll, AfterAll } = require("@badeball/cypress-cucumber-preprocessor");
 
 BeforeAll(() => {
   cy.log("=== Suite started ===");
@@ -24,10 +19,7 @@ Before({ tags: "@negative" }, () => {
 });
 
 After(function (scenario) {
-  const name =
-    scenario?.pickle?.name?.replace(/[^a-zA-Z0-9-_]+/g, "-") ||
-    "scenario";
-
+  const name = scenario?.pickle?.name?.replace(/[^a-zA-Z0-9-_]+/g, "-") || "scenario";
   const status = scenario?.result?.status || "unknown";
 
   cy.takeEvidence(`${status}-${name}`);

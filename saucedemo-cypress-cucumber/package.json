@@ -14,7 +14,6 @@
     "allure:open": "allure open allure-report",
     "allure:serve": "allure serve allure-results",
     "lint": "eslint . --config eslint.config.js --ext .js",
-    "lint:fix": "eslint . --ext .js --fix",
     "lint:fix": "eslint . --config eslint.config.js --ext .js --fix",
     "format": "prettier --write . --config .prettierc.js",
     "format:check": "prettier --check . --config .prettierc.js",
@@ -28,6 +27,7 @@
     "cypress": "^15.3.0",
     "eslint": "^9.0.0",
     "eslint-plugin-cypress": "^5.0.0",
+    "globals": "^16.0.0",
     "prettier": "^3.6.0"
   }
 }
