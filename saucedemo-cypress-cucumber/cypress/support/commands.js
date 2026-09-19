@@ -3,7 +3,8 @@ Cypress.Commands.add("login", (userType = "standard") => {
     const user = users[userType];
 
     cy.visit("/");
-    cy.get('[data-test="username"]').clear().type(user.username);
+    cy.get('[data-test="username"]').clear();
+    cy.get('[data-test="username"]').type(user.username);
     cy.get('[data-test="password"]').clear().type(user.password, { log: false });
     cy.get('[data-test="login-button"]').click();
     cy.url().should("include", "/inventory.html");

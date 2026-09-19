@@ -11,7 +11,8 @@ class LoginPage {
   }
 
   login(username, password) {
-    cy.get(this.selectors.username).clear().type(username);
+    cy.get(this.selectors.username).clear();
+    cy.get(this.selectors.username).type(username);
     cy.get(this.selectors.password).clear().type(password, { log: false });
     cy.get(this.selectors.loginButton).click();
   }

@@ -23,7 +23,8 @@ Given("estou na página de produtos", () => {
 });
 
 Given("informo o usuário {string}", (username) => {
-  cy.get(LoginPage.selectors.username).clear().type(username);
+  cy.get(LoginPage.selectors.username).clear();
+  cy.get(LoginPage.selectors.username).type(username);
 });
 
 Given("informo a senha {string}", (password) => {

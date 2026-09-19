@@ -1,37 +1,25 @@
-import eslint from "@eslint/js";
-import cypress from "eslint-plugin-cypress";
+const globals = require("globals");
+const cypress = require("eslint-plugin-cypress");
 
-export default [
+module.exports = [
   {
-    ignores: [
-      "node_modules/**",
-      "allure-report/**",
-      "allure-results/**",
-      "cypress/screenshots/**",
-      "cypress/videos/**",
-    ],
-  },
-  eslint.configs.recommended,
-  {
-    files: ["cypress/**/*.js", "cypress.config.js"],
+    files: ["*/.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        Cypress: "readonly",
+        cy: "readonly",
+        expect: "readonly",
+      },
+    },
     plugins: {
       cypress,
     },
-    languageOptions: {
-      globals: {
-        cy: "readonly",
-        Cypress: "readonly",
-        describe: "readonly",
-        it: "readonly",
-        before: "readonly",
-        beforeEach: "readonly",
-        after: "readonly",
-        afterEach: "readonly",
-      },
-    },
     rules: {
       ...cypress.configs.recommended.rules,
-      "no-console": "warn",
     },
   },
 ];
