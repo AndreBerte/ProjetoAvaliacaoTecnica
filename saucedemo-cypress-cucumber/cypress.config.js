@@ -1,20 +1,17 @@
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const {
-  addCucumberPreprocessorPlugin,
-} = require("@badeball/cypress-cucumber-preprocessor");
-const {
-  createEsbuildPlugin,
-} = require("@badeball/cypress-cucumber-preprocessor/esbuild");
+const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
+const { createEsbuildPlugin } = require("@badeball/cypress-cucumber-preprocessor/esbuild");
 const allureWriter = require("@shelex/cypress-allure-plugin/writer");
 
 async function setupNodeEvents(on, config) {
+  await addCucumberPreprocessorPlugin(on, config);
+
   const bundler = createBundler({
     plugins: [createEsbuildPlugin(config)],
   });
 
   on("file:preprocessor", bundler);
-  await addCucumberPreprocessorPlugin(on, config);
   allureWriter(on, config);
 
   return config;
@@ -28,6 +25,11 @@ module.exports = defineConfig({
     setupNodeEvents,
     screenshotOnRunFailure: true,
     video: true,
+    videoCompression: 32,
+    retries: {
+      runMode: 1,
+      openMode: 0,
+    },
     viewportWidth: 1440,
     viewportHeight: 900,
     defaultCommandTimeout: 10000,
