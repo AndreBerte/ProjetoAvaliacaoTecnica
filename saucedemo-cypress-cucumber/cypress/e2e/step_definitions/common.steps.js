@@ -127,11 +127,17 @@ Then("uma mensagem de confirmação do pedido deve ser apresentada", () => {
 });
 
 Given("deixo o campo {string} vazio", (field) => {
-  const selector = {
+  const selectors = {
     "First Name": CheckoutPage.selectors.firstName,
     "Last Name": CheckoutPage.selectors.lastName,
     "Postal Code": CheckoutPage.selectors.postalCode,
-  }[field];
+  };
+
+  const selector = selectors[field];
+
+  if (!selector) {
+    throw new Error(`Campo de checkout não suportado: ${field}`);
+  }
 
   cy.get(selector).clear();
 });
@@ -161,14 +167,13 @@ Then("o indicador do carrinho deve corresponder à quantidade de produtos adicio
   cy.get(CartPage.selectors.item)
     .its("length")
     .then((count) => {
-      cy.get('[data-test="shopping-cart-badge"]').should("have.text", String(count));
+      cy.get(ProductsPage.selectors.cartBadge).should("have.text", String(count));
     });
 });
 
 When("tento adicionar novamente um produto que já está no carrinho", () => {
   cy.go("back");
-
-  cy.url().should("include", "/inventory.html");
+  ProductsPage.assertLoaded();
 
   cy.fixture("products").then((products) => {
     ProductsPage.addProduct(products.backpack);
