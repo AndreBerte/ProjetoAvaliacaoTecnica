@@ -176,7 +176,7 @@ When("tento adicionar novamente um produto que já está no carrinho", () => {
   ProductsPage.assertLoaded();
 
   cy.fixture("products").then((products) => {
-    ProductsPage.addProduct(products.backpack);
+    ProductsPage.assertRemoveButtonForProduct(products.backpack);
   });
 });
 

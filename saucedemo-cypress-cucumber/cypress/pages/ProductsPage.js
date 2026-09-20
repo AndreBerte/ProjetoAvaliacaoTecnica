@@ -21,6 +21,12 @@ class ProductsPage {
       });
   }
 
+  assertRemoveButtonForProduct(productName) {
+    cy.contains(this.selectors.inventoryItem, productName)
+      .find('[data-test^="remove"]')
+      .should("be.visible");
+  }
+
   addAllProducts() {
     cy.get(this.selectors.inventoryItem).each(($item) => {
       cy.wrap($item)
