@@ -14,17 +14,24 @@ class ProductsPage {
   }
 
   addProduct(productName) {
-    cy.contains('[data-test^="add-to-cart"]', productName).click();
+    cy.contains(this.selectors.inventoryItem, productName)
+      .should("be.visible")
+      .within(() => {
+        cy.get('[data-test^="add-to-cart"]').click();
+      });
   }
 
   addAllProducts() {
-    cy.get('[data-test^="add-to-cart"]').each(($button) => {
-      cy.wrap($button).click();
+    cy.get(this.selectors.inventoryItem).each(($item) => {
+      cy.wrap($item)
+        .find('[data-test^="add-to-cart"]')
+        .should("be.visible")
+        .click();
     });
   }
 
   openCart() {
-    cy.get(this.selectors.cartLink).click();
+    cy.get(this.selectors.cartLink).should("be.visible").click();
   }
 
   assertCartCount(count) {

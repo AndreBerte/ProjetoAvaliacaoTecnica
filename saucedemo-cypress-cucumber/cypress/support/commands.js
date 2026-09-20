@@ -13,13 +13,15 @@ Cypress.Commands.add("login", (userType = "standard") => {
 });
 
 Cypress.Commands.add("addProductToCart", (productName) => {
-  cy.contains('[data-test^="add-to-cart"]', productName)
+  cy.contains('[data-test="inventory-item"]', productName)
     .should("be.visible")
-    .click();
+    .within(() => {
+      cy.get('[data-test^="add-to-cart"]').click();
+    });
 });
 
 Cypress.Commands.add("openCart", () => {
-  cy.get('[data-test="shopping-cart-link"]').click();
+  cy.get('[data-test="shopping-cart-link"]').should("be.visible").click();
 });
 
 Cypress.Commands.add("takeEvidence", (name) => {

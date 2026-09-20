@@ -6,17 +6,18 @@ class CartPage {
   };
 
   assertProduct(productName) {
-    cy.get(this.selectors.cartList).should("contain", productName);
+    cy.get(this.selectors.cartList).should("contain.text", productName);
   }
 
   removeProduct(productName) {
-    cy.contains(this.selectors.item, productName)
+    cy.contains(this.selectors.cartList, productName)
       .find('[data-test^="remove"]')
+      .should("be.visible")
       .click();
   }
 
   assertProductNotPresent(productName) {
-    cy.get(this.selectors.cartList).should("not.contain", productName);
+    cy.get(this.selectors.cartList).should("not.contain.text", productName);
   }
 
   assertEmpty() {
@@ -26,7 +27,7 @@ class CartPage {
   }
 
   checkout() {
-    cy.get(this.selectors.checkout).click();
+    cy.get(this.selectors.checkout).should("be.visible").click();
   }
 }
 
