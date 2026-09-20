@@ -167,6 +167,9 @@ Then("o indicador do carrinho deve corresponder à quantidade de produtos adicio
 
 When("tento adicionar novamente um produto que já está no carrinho", () => {
   cy.go("back");
+
+  cy.url().should("include", "/inventory.html");
+
   cy.fixture("products").then((products) => {
     ProductsPage.addProduct(products.backpack);
   });
@@ -174,6 +177,7 @@ When("tento adicionar novamente um produto que já está no carrinho", () => {
 
 Then("o produto não deve ser duplicado no carrinho", () => {
   cy.openCart();
+
   cy.fixture("products").then((products) => {
     cy.get(CartPage.selectors.item)
       .filter(`:contains("${products.backpack}")`)
