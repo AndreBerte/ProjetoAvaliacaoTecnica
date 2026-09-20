@@ -14,11 +14,22 @@ class ProductsPage {
   }
 
   addProduct(productName) {
+    cy.contains(this.selectors.inventoryItem, productName).then(($card) => {
+      const addButton = $card.find('[data-test^="add-to-cart"]');
+
+      if (addButton.length) {
+        cy.wrap($card).find('[data-test^="add-to-cart"]').click();
+        return;
+      }
+
+      cy.wrap($card).find('[data-test^="remove"]').should("be.visible");
+    });
+  }
+
+  assertRemoveButtonForProduct(productName) {
     cy.contains(this.selectors.inventoryItem, productName)
-      .should("be.visible")
-      .within(() => {
-        cy.get('[data-test^="add-to-cart"]').click();
-      });
+      .find('[data-test^="remove"]')
+      .should("be.visible");
   }
 
   addAllProducts() {
