@@ -11,27 +11,20 @@ class CheckoutPage {
     total: '[data-test="total-label"]',
   };
 
-  fillCustomerData(data) {
-    cy.get(this.selectors.firstName).clear();
-    cy.get(this.selectors.firstName).type(data.firstName);
-
-    cy.get(this.selectors.lastName).clear();
-    cy.get(this.selectors.lastName).type(data.lastName);
-
-    cy.get(this.selectors.postalCode).clear();
-    cy.get(this.selectors.postalCode).type(data.postalCode);
-  }
-
   continue() {
-    cy.get(this.selectors.continue).click();
+    cy.get(this.selectors.continue).should("be.visible").click();
   }
 
   assertErrorContains(message) {
-    cy.get(this.selectors.error).should("contain.text", message);
+    cy.get(this.selectors.error)
+      .should("be.visible")
+      .and("contain.text", message);
   }
 
   assertSummaryContains(productName) {
-    cy.get(this.selectors.summary).should("contain.text", productName);
+    cy.get(this.selectors.summary)
+      .should("be.visible")
+      .and("contain.text", productName);
   }
 
   assertTotalVisible() {
@@ -39,12 +32,12 @@ class CheckoutPage {
   }
 
   finish() {
-    cy.get(this.selectors.finish).click();
+    cy.get(this.selectors.finish).should("be.visible").click();
   }
 
   assertPurchaseCompleted() {
-    cy.get(this.selectors.complete).should("be.visible");
     cy.url().should("include", "/checkout-complete.html");
+    cy.get(this.selectors.complete).should("be.visible");
   }
 }
 

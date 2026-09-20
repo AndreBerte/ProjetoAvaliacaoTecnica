@@ -44,14 +44,10 @@ No GitHub, use `Repository Variables` para URL e limites públicos. Use `Secrets
 
 ## Integração com projeto existente
 
-1. Copie `cypress/e2e/features/*.feature`.
-2. Copie `cypress/pages/BrasilApiPage.js`.
-3. Copie `cypress/services/BrasilApiClient.js`.
-4. Mescle `cypress/support/commands.js`, `hooks.js`, `e2e.js` e `steps` com os arquivos existentes.
-5. Mescle a configuração de Cucumber/Allure em `cypress.config.js`.
-6. Adicione `.github/workflows/brasilapi-api-tests.yml`.
+1. Mescle a configuração de Cucumber/Allure em `cypress.config.js`.
+2. Caso precise trocar alguma configuração de yml Adicione no `.github/workflows/brasilapi-api-tests.yml`.
 
-Não substitua o `cypress.config.js` do projeto existente sem mesclar as configurações próprias dele.
+Não substitua o `cypress.config.js` do projeto existente as configurações são unicas e próprias deste projeto.
 
 ## Critérios verificáveis
 
