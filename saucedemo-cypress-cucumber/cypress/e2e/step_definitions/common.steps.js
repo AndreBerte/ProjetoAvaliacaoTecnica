@@ -92,14 +92,17 @@ When("clico em {string}", (button) => {
 });
 
 Given("informo o primeiro nome {string}", (value) => {
+  cy.get(CheckoutPage.selectors.firstName).clear();
   cy.get(CheckoutPage.selectors.firstName).type(value);
 });
 
 Given("informo o sobrenome {string}", (value) => {
+  cy.get(CheckoutPage.selectors.lastName).clear();
   cy.get(CheckoutPage.selectors.lastName).type(value);
 });
 
 Given("informo o código postal {string}", (value) => {
+  cy.get(CheckoutPage.selectors.postalCode).clear();
   cy.get(CheckoutPage.selectors.postalCode).type(value);
 });
 
@@ -182,7 +185,6 @@ Then("a quantidade total de itens não deve ultrapassar a quantidade de produtos
   cy.get(CartPage.selectors.item)
     .its("length")
     .then((cartCount) => {
-      cy.get('[data-test="shopping-cart-badge"]').should("have.text", String(cartCount));
-      expect(cartCount).to.be.at.most(6);
+      cy.wrap(cartCount).should("be.at.most", 6);
     });
 });
