@@ -6,8 +6,8 @@ class CheckoutPage {
     continue: '[data-test="continue"]',
     finish: '[data-test="finish"]',
     error: '[data-test="error"]',
-    summary: '[data-test="checkout-summary"]',
-    complete: '[data-test="checkout-complete"]',
+    summary: '[data-test="checkout-summary-container"]',
+    complete: '[data-test="checkout-complete-container"]',
     total: '[data-test="total-label"]',
   };
 
@@ -27,11 +27,11 @@ class CheckoutPage {
   }
 
   assertErrorContains(message) {
-    cy.get(this.selectors.error).should("contain", message);
+    cy.get(this.selectors.error).should("contain.text", message);
   }
 
   assertSummaryContains(productName) {
-    cy.get(this.selectors.summary).should("contain", productName);
+    cy.get(this.selectors.summary).should("contain.text", productName);
   }
 
   assertTotalVisible() {
