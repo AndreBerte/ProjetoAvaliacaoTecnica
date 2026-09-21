@@ -2,6 +2,10 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import BrasilApiPage from '../../pages/BrasilApiPage';
 import BrasilApiClient from '../../services/BrasilApiClient';
 
+const bank = require("../../pages/BrasilApiPage");
+const cep = require("../../pages/BrasilApiPage");
+const cnpj = require("../../pages/BrasilApiPage");
+
 let lastResponse;
 
 Given('que a BrasilAPI está disponível', function () {return "pending";});
