@@ -39,9 +39,9 @@ jobs:
       #  working-directory: brasilapi-cypress-cucumber-rest-qa
       #  run: npm run lint
 
-      - name: Format check
-        working-directory: brasilapi-cypress-cucumber-rest-qa
-        #run: npm run format:check
+      #- name: Format check
+      #  working-directory: brasilapi-cypress-cucumber-rest-qa
+      #  run: npm run format:check
 
       - name: Cypress REST tests
         uses: cypress-io/github-action@v7
