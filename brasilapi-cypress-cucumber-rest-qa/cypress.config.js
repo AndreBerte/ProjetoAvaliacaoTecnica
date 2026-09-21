@@ -24,7 +24,7 @@ async function setupNodeEvents(on, config) {
 
 module.exports = defineConfig({
   e2e: {
-    apiBaseUrl: 'https://brasilapi.com.br'
+    apiBaseUrl: 'https://brasilapi.com.br',
     specPattern: "cypress/e2e/features/**/*.feature",
     supportFile: "cypress/support/e2e.js",
     setupNodeEvents,
