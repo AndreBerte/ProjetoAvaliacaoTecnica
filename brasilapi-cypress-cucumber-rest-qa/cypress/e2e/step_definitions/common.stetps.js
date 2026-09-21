@@ -1,10 +1,7 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import BrasilApiPage from '../../pages/BrasilApiPage';
-import BrasilApiClient from '../../services/BrasilApiClient';
+const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor');
 
-const bank = require("../../pages/BrasilApiPage");
-const cep = require("../../pages/BrasilApiPage");
-const cnpj = require("../../pages/BrasilApiPage");
+const BrasilApiPage = require('../../pages/BrasilApiPage');
+const BrasilApiClient = require( '../../services/BrasilApiClient');
 
 let lastResponse;
 
