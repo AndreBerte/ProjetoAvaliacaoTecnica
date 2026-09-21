@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: brasilapi-evidence
           path: brasilapi-cypress-cucumber-rest-qa/evidence/
@@ -64,7 +64,7 @@ jobs:
 
       - name: Upload Allure results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: brasilapi-allure-results
           path: brasilapi-cypress-cucumber-rest-qa/allure-results/
@@ -73,7 +73,7 @@ jobs:
 
       - name: Upload Allure report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: brasilapi-allure-report
           path: brasilapi-cypress-cucumber-rest-qa/allure-report/
