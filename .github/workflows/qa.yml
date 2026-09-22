@@ -18,12 +18,13 @@ permissions:
 jobs:
   cypress:
     name: E2E - Cypress + Cucumber
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     env:
       CYPRESS_BASE_URL: https://www.saucedemo.com
       CYPRESS_TAGS: ${{ github.event.inputs.tags || '@regression' }}
+      CYPRESS_allure: "true"
 
     defaults:
       run:
@@ -31,23 +32,28 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-          #cache: npm
-          #cache-dependency-path: saucedemo-cypress-cucumber/package-lock.json
 
       - name: Install dependencies
         run: npm install --include=dev
+
+      - name: Prepare report directories
+        run: |
+          mkdir -p allure-results
+          mkdir -p allure-report
+          mkdir -p cypress/screenshots
+          mkdir -p cypress/videos
 
       - name: Lint
         run: npm run lint
 
       - name: Format files
-        run: npm run format  
+        run: npm run format
 
       - name: Format check
         run: npm run format:check
@@ -57,24 +63,42 @@ jobs:
         continue-on-error: true
         run: npm test
 
+      - name: Check Allure results
+        if: always()
+        run: |
+          echo "Conteúdo de allure-results:"
+          find allure-results -maxdepth 2 -type f -print 2>/dev/null || true
+
       - name: Generate Allure report
         if: always()
         run: |
-          mkdir -p allure-results
-          npm run allure:generate 
-          
+          if find allure-results -type f -print -quit 2>/dev/null | grep -q .; then
+            npm run allure:generate
+          else
+            echo "::warning::Nenhum arquivo Allure foi gerado. Verifique a configuração do @shelex/cypress-allure-plugin no cypress.config.js e no support/e2e.js."
+          fi
+
       - name: Upload Allure raw results
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: allure-results
           path: saucedemo-cypress-cucumber/allure-results
           if-no-files-found: warn
           retention-days: 14
 
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: saucedemo-cypress-cucumber/allure-report
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Upload screenshots
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: saucedemo-cypress-cucumber/cypress/screenshots
@@ -83,20 +107,11 @@ jobs:
 
       - name: Upload videos
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: videos
           path: saucedemo-cypress-cucumber/cypress/videos
           if-no-files-found: ignore
-          retention-days: 14
-
-      - name: Upload Allure report for deployment
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: allure-report
-          path: saucedemo-cypress-cucumber/allure-report
-          if-no-files-found: warn
           retention-days: 14
 
       - name: Fail job if Cypress failed
