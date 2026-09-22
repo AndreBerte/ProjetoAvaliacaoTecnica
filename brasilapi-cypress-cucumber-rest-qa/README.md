@@ -55,4 +55,4 @@ Não substitua o `cypress.config.js` do projeto existente sem mesclar as configu
 
 ## Critérios verificáveis
 
-A suíte não usa afirmações vagas. Cada teste valida status HTTP, Content-Type e/ou contrato de payload. A BrasilAPI documenta `200`, `400` e `404` conforme o endpoint e define um schema `ErrorMessage`; mudanças incompatíveis de status/campos devem ser tratadas como breaking changes. citeturn0search0turn0search10
+A suíte não usa afirmações vagas. Cada teste valida status HTTP, Content-Type e/ou contrato de payload. A BrasilAPI documenta `200`, `400` e `404` conforme o endpoint e define um schema `ErrorMessage`; mudanças incompatíveis de status/campos devem ser tratadas como breaking changes.
