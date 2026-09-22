@@ -18,7 +18,7 @@ permissions:
 jobs:
   cypress:
     name: E2E - Cypress + Cucumber
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
 
     env:
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload Allure raw results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results
           path: saucedemo-cypress-cucumber/allure-results
@@ -89,7 +89,7 @@ jobs:
 
       - name: Upload Allure report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-report
           path: saucedemo-cypress-cucumber/allure-report
@@ -98,7 +98,7 @@ jobs:
 
       - name: Upload screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: screenshots
           path: saucedemo-cypress-cucumber/cypress/screenshots
@@ -107,7 +107,7 @@ jobs:
 
       - name: Upload videos
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: videos
           path: saucedemo-cypress-cucumber/cypress/videos
